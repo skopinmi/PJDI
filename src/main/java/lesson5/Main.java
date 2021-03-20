@@ -1,6 +1,7 @@
 package lesson5;
 
 import lesson5.baseDao.BaseDao;
+import lesson5.dao.Dao;
 import lesson5.entities.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -13,6 +14,9 @@ public class Main {
         SessionFactory factory =  getSessionFactory();
 
         BaseDao <Student> baseDao = new BaseDao<>(factory, Student.class);
+
+        Dao dao = new Dao(factory);
+
 // сохранение в таблицу
 
 //        for (int i = 0; i < 10; i++) {
@@ -22,10 +26,12 @@ public class Main {
 
 // чтение из таблицы по id
 
-        for (int i = 1; i < 50; i++) {
-            System.out.println(baseDao.get((long) i));
-        }
-        factory.close();
+//        for (int i = 1; i < 50; i++) {
+//            System.out.println(baseDao.get((long) i));
+//        }
+//        factory.close();
+
+
     }
 
     public static SessionFactory getSessionFactory (){

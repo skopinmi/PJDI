@@ -28,22 +28,14 @@ public class Dao {
     }
 
     public void update (Student student) {
+        session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Student studentForUpdate = session.createQuery("SELECT s FROM students s WHERE s.id = :id", Student.class)
+        Student studentForUpdate = session.createQuery("SELECT s FROM Student s WHERE s.id = :id", Student.class)
                 .setParameter("id", student.getId())
                 .getSingleResult();
-        System.out.println(studentForUpdate);
-
-        simpleItemForUpdate.setPrice(simpleItemForUpdate.getPrice() + 1100000);
-        System.out.println("Modified item: " + simpleItemForUpdate);
+        studentForUpdate.setName(student.getName());
+        studentForUpdate.setMark(student.getMark());
         session.getTransaction().commit();
-
-        session = factory.getCurrentSession();
-        session.beginTransaction();
-        SimpleItem simpleItemAfterUpdate = session.get(SimpleItem.class, simpleItemForUpdate.getId());
-        System.out.println("Loaded item after update: " + simpleItemAfterUpdate);
-        session.getTransaction().commit();
-        
     }
 
     public void delete (Long id) {

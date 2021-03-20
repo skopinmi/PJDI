@@ -3,7 +3,7 @@ package lesson5.baseDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class BaseDao <T> {
+public class BaseDao <T >   {
     private SessionFactory sessionFactory;
     private Session session;
     private Class <T> item;
