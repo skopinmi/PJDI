@@ -6,21 +6,21 @@ import lesson5.entities.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class MainDao {
+public class MainDaoSession {
 
     public static void main(String[] args) {
         SessionFactory factory =  getSessionFactory();
         Dao dao = new Dao(factory);
 
-        System.out.println(dao.getById((long) 1));
-        Student student = dao.getById((long) 1);
+        System.out.println(dao.getById(1l));
+        Student student = dao.getById(1l);
         student.setName(student.getName() + " changed name ");
         System.out.println("up");
         dao.update(student);
-        System.out.println(dao.getById((long) 1));
+        System.out.println(dao.getById(1l));
         System.out.println("del");
-        dao.delete((long) 1);
-        System.out.println(dao.getById((long) 1));
+        dao.delete(1l);
+        System.out.println(dao.getById( 1l));
         System.out.println("save");
         dao.save(student);
 

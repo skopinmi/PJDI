@@ -3,7 +3,9 @@ package lesson5.baseDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class BaseDao <T >   {
+import java.io.Serializable;
+
+public class BaseDao <T , K >   {
     private SessionFactory sessionFactory;
     private Session session;
     private Class <T> item;
@@ -23,15 +25,9 @@ public class BaseDao <T >   {
         }
     }
 
-    public T get (Long id) {
+    public T get (K id) {
         T temp;
         session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        temp = session.get(item , id);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-        return temp;
+        return session.get(item , (Serializable) id);
     }
 }

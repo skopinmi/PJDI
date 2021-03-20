@@ -6,14 +6,16 @@ import lesson5.entities.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.persistence.EntityManagerFactory;
 
-public class Main {
+
+public class MainBaseDao {
 
     public static void main(String[] args) {
 
         SessionFactory factory =  getSessionFactory();
 
-        BaseDao <Student> baseDao = new BaseDao<>(factory, Student.class);
+        BaseDao <Student, Long> baseDao = new BaseDao<>(factory, Student.class);
 
         Dao dao = new Dao(factory);
 
@@ -41,6 +43,13 @@ public class Main {
             .addAnnotatedClass(Student.class)
             .buildSessionFactory();
 
+        return factory;
+    }
+
+    public static EntityManagerFactory getEntityManagerFactory() {
+        EntityManagerFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .buildSessionFactory();
         return factory;
     }
 }

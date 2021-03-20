@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 public class Dao {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private Session session;
 
     public Dao (SessionFactory sessionFactory) {
@@ -21,10 +21,7 @@ public class Dao {
 
     public Student getById (Long id) {
         session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-        Student student = session.get(Student.class , id);
-        session.getTransaction().commit();
-        return student;
+        return session.get(Student.class, id);
     }
 
     public void update (Student student) {
